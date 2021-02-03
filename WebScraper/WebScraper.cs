@@ -45,7 +45,7 @@ namespace WebScraper
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
                 var key = card.Descendents<IElement>().First(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
-                if (key.TextContent != "Difference to previous day")
+                if (!key.TextContent.StartsWith("Difference to"))
                 {
                     throw new InvalidFormatException();
                 }

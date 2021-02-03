@@ -12,7 +12,7 @@ namespace SwissCovidCases
     {
         private static string LastCheckFile => $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\swisscovidcases_lastcheck.txt";
 
-        private static Timer timer;
+        private readonly static Timer timer = new Timer();
         private static DateTime? lastCheck = null;
 
         /// <summary>
@@ -25,9 +25,8 @@ namespace SwissCovidCases
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            timer = new Timer();
             timer.Interval = 1000;
-            timer.Tick += async (object sender, EventArgs e) => await TickAsync(sender, e);
+            timer.Tick += async (object? sender, EventArgs e) => await TickAsync(sender, e);
             timer.Start();
 
             Application.Run();
@@ -46,13 +45,13 @@ namespace SwissCovidCases
             return lastCheck;
         }
 
-        private static async Task TickAsync(object sender, EventArgs e)
+        private static async Task TickAsync(object? sender, EventArgs e)
         {
             var last = LastCheck();
             if (last == null || last < DateTime.Today)
             {
                 timer.Stop();
-                WebScraper.WebScraper.Result? result = null;
+                WebScraper.WebScraper.Result? result;
                 try
                 {
                     result = await WebScraper.WebScraper.Scrape();
@@ -65,8 +64,13 @@ namespace SwissCovidCases
                     return;
                 }
 
+                // No updates on the weekend in Switzerland
+                if (DateTime.Today.DayOfWeek == DayOfWeek.Saturday || DateTime.Today.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    timer.Interval = 6 * 60 * 60 * 1000;  // 6h
+                }
                 // Adjust timer if it is too early in the morning
-                if (result != null && last >= result.Date && DateTime.Now.Hour < 7)
+                else if (result != null && last >= result.Date && DateTime.Now.Hour < 11)
                 {
                     timer.Interval = 60 * 60 * 1000;  // 1h
                 }
