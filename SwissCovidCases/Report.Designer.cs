@@ -37,6 +37,8 @@
             this.confirmedDeathsLabel = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.dateLabel = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.fullyVaccinatedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -105,7 +107,7 @@
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(400, 146);
+            this.okButton.Location = new System.Drawing.Point(400, 171);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(112, 34);
             this.okButton.TabIndex = 7;
@@ -117,11 +119,29 @@
             // 
             this.dateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateLabel.AutoSize = true;
-            this.dateLabel.Location = new System.Drawing.Point(12, 151);
+            this.dateLabel.Location = new System.Drawing.Point(12, 176);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(59, 25);
             this.dateLabel.TabIndex = 8;
             this.dateLabel.Text = "label3";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 126);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(137, 25);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Fully Vaccinated";
+            // 
+            // fullyVaccinatedLabel
+            // 
+            this.fullyVaccinatedLabel.AutoSize = true;
+            this.fullyVaccinatedLabel.Location = new System.Drawing.Point(268, 126);
+            this.fullyVaccinatedLabel.Name = "fullyVaccinatedLabel";
+            this.fullyVaccinatedLabel.Size = new System.Drawing.Size(59, 25);
+            this.fullyVaccinatedLabel.TabIndex = 10;
+            this.fullyVaccinatedLabel.Text = "label9";
             // 
             // Report
             // 
@@ -129,7 +149,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(524, 192);
+            this.ClientSize = new System.Drawing.Size(524, 217);
+            this.Controls.Add(this.fullyVaccinatedLabel);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.confirmedDeathsLabel);
@@ -139,7 +161,7 @@
             this.Controls.Add(this.confirmedCasesLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.MinimumSize = new System.Drawing.Size(465, 248);
+            this.MinimumSize = new System.Drawing.Size(546, 273);
             this.Name = "Report";
             this.Text = "Daily Covid Report";
             this.ResumeLayout(false);
@@ -158,6 +180,8 @@
         private System.Windows.Forms.Label confirmedDeathsLabel;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Label dateLabel;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label fullyVaccinatedLabel;
     }
 }
 

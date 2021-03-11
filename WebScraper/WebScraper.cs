@@ -16,13 +16,15 @@ namespace WebScraper
             public string NewConfirmedCases { get; }
             public string NewHospitalisations { get; }
             public string NewConfirmedDeaths { get; }
+            public string FullyVaccinatedPeople { get; }
 
-            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths)
+            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string fullyVaccinatedPeople)
             {
                 Date = date;
                 NewConfirmedCases = newConfirmedCases;
                 NewHospitalisations = newHospitalisations;
                 NewConfirmedDeaths = newConfirmedDeaths;
+                FullyVaccinatedPeople = fullyVaccinatedPeople;
             }
         }
 
@@ -58,6 +60,24 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
+            var vaccinated = cards.Skip(4).Take(1).Select(card =>
+            {
+                var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
+                if (title.TextContent != "Vaccinations")
+                {
+                    throw new InvalidFormatException();
+                }
+
+                var key = card.Descendents<IElement>().Last(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
+                if (key.TextContent != "Fully vaccinated people")
+                {
+                    throw new InvalidFormatException();
+                }
+
+                var value = card.Descendents<IElement>().Last(e => e.ClassList.Contains("bag-key-value-list__entry-value"));
+                return value.TextContent;
+            }).First();
+
             // Date is in the subtitle of every card
             var encodedDate = document.QuerySelector(".card__subtitle").TextContent.Trim();
             var prefix = "Source: FOPH – Status: ";
@@ -66,7 +86,7 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
-            return new Result(date, values[0].Value, values[1].Value, values[2].Value);
+            return new Result(date, values[0].Value, values[1].Value, values[2].Value, vaccinated);
         }
     }
 }
