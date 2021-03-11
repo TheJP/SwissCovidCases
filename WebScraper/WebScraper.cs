@@ -53,7 +53,7 @@ namespace WebScraper
                 return (Title: title.TextContent, Value: value.TextContent);
             }).ToArray();
 
-            if (values.Length != 3 || values[0].Title != "Laboratory-confirmed cases" || values[1].Title != "Laboratory-confirmed hospitalisations" || values[2].Title != "Laboratory-confirmed deaths")
+            if (values.Length != 3 || values[0].Title != "Laboratory-⁠confirmed cases" || values[1].Title != "Laboratory-⁠confirmed hospitalisations" || values[2].Title != "Laboratory-⁠confirmed deaths")
             {
                 throw new InvalidFormatException();
             }
