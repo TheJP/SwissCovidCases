@@ -60,7 +60,7 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
-            var vaccinated = cards.Skip(4).Take(1).Select(card =>
+            var vaccinated = cards.Skip(6).Take(1).Select(card =>
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
                 if (title.TextContent != "Vaccinations")
@@ -68,13 +68,13 @@ namespace WebScraper
                     throw new InvalidFormatException();
                 }
 
-                var key = card.Descendents<IElement>().Last(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
+                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(6).First();
                 if (key.TextContent != "Fully vaccinated people")
                 {
                     throw new InvalidFormatException();
                 }
 
-                var value = card.Descendents<IElement>().Last(e => e.ClassList.Contains("bag-key-value-list__entry-value"));
+                var value = key.Parent.Parent.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-value")).First();
                 return value.TextContent;
             }).First();
 
