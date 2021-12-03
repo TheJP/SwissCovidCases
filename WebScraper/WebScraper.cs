@@ -37,12 +37,17 @@ namespace WebScraper
         /// Quick and dirty scraping. Trying to throw an exception if the format of the website changes, so that no wrong values are returned.
         /// </summary>
         /// <returns></returns>
-        public static async Task<Result> Scrape()
+        public static async Task<Result?> Scrape()
         {
             var context = new BrowsingContext(Configuration.Default.WithDefaultLoader());
             var document = await context.OpenAsync("https://www.covid19.admin.ch/en/overview");
 
             var cards = document.QuerySelectorAll(".card");
+            if (cards.Length == 0)
+            {
+                return null;
+            }
+
             var values = cards.Take(3).Select(card =>
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
@@ -63,13 +68,13 @@ namespace WebScraper
             var vaccinated = cards.Skip(3).Take(1).Select(card =>
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
-                if (title.TextContent != "Vaccinations")
+                if (title.TextContent != "Vaccinated people")
                 {
                     throw new InvalidFormatException();
                 }
 
-                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(6).First();
-                if (key.TextContent != "Fully vaccinated people")
+                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(3).First();
+                if (key.TextContent != "Fully vaccinated")
                 {
                     throw new InvalidFormatException();
                 }
