@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.differenceSinceLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.confirmedCasesLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,14 +41,14 @@
             this.fullyVaccinatedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // label1
+            // differenceSinceLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(221, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Difference to previous day";
+            this.differenceSinceLabel.AutoSize = true;
+            this.differenceSinceLabel.Location = new System.Drawing.Point(12, 9);
+            this.differenceSinceLabel.Name = "differenceSinceLabel";
+            this.differenceSinceLabel.Size = new System.Drawing.Size(221, 25);
+            this.differenceSinceLabel.TabIndex = 0;
+            this.differenceSinceLabel.Text = "Difference to previous day";
             // 
             // label2
             // 
@@ -160,7 +160,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.confirmedCasesLabel);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.differenceSinceLabel);
             this.MinimumSize = new System.Drawing.Size(546, 273);
             this.Name = "Report";
             this.Text = "Daily Covid Report";
@@ -171,7 +171,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label differenceSinceLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label confirmedCasesLabel;
         private System.Windows.Forms.Label label4;

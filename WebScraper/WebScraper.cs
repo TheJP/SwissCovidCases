@@ -17,14 +17,16 @@ namespace WebScraper
             public string NewHospitalisations { get; }
             public string NewConfirmedDeaths { get; }
             public string FullyVaccinatedPeople { get; }
+            public string DifferenceSince { get; }
 
-            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string fullyVaccinatedPeople)
+            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string fullyVaccinatedPeople, string differenceSince)
             {
                 Date = date;
                 NewConfirmedCases = newConfirmedCases;
                 NewHospitalisations = newHospitalisations;
                 NewConfirmedDeaths = newConfirmedDeaths;
                 FullyVaccinatedPeople = fullyVaccinatedPeople;
+                DifferenceSince = differenceSince;
             }
         }
 
@@ -52,12 +54,12 @@ namespace WebScraper
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
                 var key = card.Descendents<IElement>().First(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
-                if (!key.TextContent.StartsWith("Difference to"))
+                if (!key.TextContent.StartsWith("Difference since"))
                 {
                     throw new InvalidFormatException();
                 }
                 var value = card.Descendents<IElement>().First(e => e.ClassList.Contains("bag-key-value-list__entry-value"));
-                return (Title: title.TextContent, Value: value.TextContent);
+                return (Title: title.TextContent, Value: value.TextContent, DifferenceSince: key.TextContent);
             }).ToArray();
 
             if (values.Length != 3 || values[0].Title != "Laboratory-⁠confirmed cases" || values[1].Title != "Laboratory-⁠confirmed hospitalisations" || values[2].Title != "Laboratory-⁠confirmed deaths")
@@ -91,7 +93,7 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
-            return new Result(date, values[0].Value, values[1].Value, values[2].Value, vaccinated);
+            return new Result(date, values[0].Value, values[1].Value, values[2].Value, vaccinated, values[0].DifferenceSince);
         }
     }
 }

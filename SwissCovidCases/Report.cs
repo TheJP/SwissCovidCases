@@ -21,6 +21,7 @@ namespace SwissCovidCases
             confirmedDeathsLabel.Text = data.NewConfirmedDeaths;
             fullyVaccinatedLabel.Text = data.FullyVaccinatedPeople;
             dateLabel.Text = data.Date.ToString("d", CultureInfo.CurrentCulture);
+            differenceSinceLabel.Text = data.DifferenceSince;
         }
 
         private void OkButtonClick(object sender, EventArgs e)
