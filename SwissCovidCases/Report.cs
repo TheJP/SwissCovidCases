@@ -19,6 +19,11 @@ namespace SwissCovidCases
             confirmedCasesLabel.Text = data.NewConfirmedCases;
             hospitalisationsLabel.Text = data.NewHospitalisations;
             confirmedDeathsLabel.Text = data.NewConfirmedDeaths;
+
+            confirmedCasesDailyLabel.Text = DailyValue(data.NewConfirmedCases);
+            hospitalisationsDailyLabel.Text = DailyValue(data.NewHospitalisations);
+            confirmedDeathsDailyLabel.Text = DailyValue(data.NewConfirmedDeaths);
+
             fullyVaccinatedLabel.Text = data.FullyVaccinatedPeople;
             dateLabel.Text = data.Date.ToString("d", CultureInfo.CurrentCulture);
             differenceSinceLabel.Text = data.DifferenceSince;
@@ -28,5 +33,9 @@ namespace SwissCovidCases
         {
             Close();
         }
+
+        private string DailyValue(string input) => (int.Parse(RemoveWhitespace(input)) / 7).ToString();
+
+        private string RemoveWhitespace(string input) => string.Join("", input.Trim().Split());
     }
 }

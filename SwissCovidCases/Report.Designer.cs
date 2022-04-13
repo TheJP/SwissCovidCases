@@ -39,6 +39,10 @@
             this.dateLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.fullyVaccinatedLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.confirmedCasesDailyLabel = new System.Windows.Forms.Label();
+            this.confirmedDeathsDailyLabel = new System.Windows.Forms.Label();
+            this.hospitalisationsDailyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // differenceSinceLabel
@@ -46,9 +50,9 @@
             this.differenceSinceLabel.AutoSize = true;
             this.differenceSinceLabel.Location = new System.Drawing.Point(12, 9);
             this.differenceSinceLabel.Name = "differenceSinceLabel";
-            this.differenceSinceLabel.Size = new System.Drawing.Size(221, 25);
+            this.differenceSinceLabel.Size = new System.Drawing.Size(114, 25);
             this.differenceSinceLabel.TabIndex = 0;
-            this.differenceSinceLabel.Text = "Difference to previous day";
+            this.differenceSinceLabel.Text = "Difference to";
             // 
             // label2
             // 
@@ -143,6 +147,46 @@
             this.fullyVaccinatedLabel.TabIndex = 10;
             this.fullyVaccinatedLabel.Text = "label9";
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(400, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(92, 25);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Avg. Daily";
+            // 
+            // confirmedCasesDailyLabel
+            // 
+            this.confirmedCasesDailyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.confirmedCasesDailyLabel.AutoSize = true;
+            this.confirmedCasesDailyLabel.Location = new System.Drawing.Point(400, 51);
+            this.confirmedCasesDailyLabel.Name = "confirmedCasesDailyLabel";
+            this.confirmedCasesDailyLabel.Size = new System.Drawing.Size(59, 25);
+            this.confirmedCasesDailyLabel.TabIndex = 12;
+            this.confirmedCasesDailyLabel.Text = "label3";
+            // 
+            // confirmedDeathsDailyLabel
+            // 
+            this.confirmedDeathsDailyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.confirmedDeathsDailyLabel.AutoSize = true;
+            this.confirmedDeathsDailyLabel.Location = new System.Drawing.Point(400, 101);
+            this.confirmedDeathsDailyLabel.Name = "confirmedDeathsDailyLabel";
+            this.confirmedDeathsDailyLabel.Size = new System.Drawing.Size(59, 25);
+            this.confirmedDeathsDailyLabel.TabIndex = 14;
+            this.confirmedDeathsDailyLabel.Text = "label7";
+            // 
+            // hospitalisationsDailyLabel
+            // 
+            this.hospitalisationsDailyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.hospitalisationsDailyLabel.AutoSize = true;
+            this.hospitalisationsDailyLabel.Location = new System.Drawing.Point(400, 76);
+            this.hospitalisationsDailyLabel.Name = "hospitalisationsDailyLabel";
+            this.hospitalisationsDailyLabel.Size = new System.Drawing.Size(59, 25);
+            this.hospitalisationsDailyLabel.TabIndex = 13;
+            this.hospitalisationsDailyLabel.Text = "label5";
+            // 
             // Report
             // 
             this.AcceptButton = this.okButton;
@@ -150,6 +194,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(524, 217);
+            this.Controls.Add(this.confirmedDeathsDailyLabel);
+            this.Controls.Add(this.hospitalisationsDailyLabel);
+            this.Controls.Add(this.confirmedCasesDailyLabel);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.fullyVaccinatedLabel);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateLabel);
@@ -182,6 +230,10 @@
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label fullyVaccinatedLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label confirmedCasesDailyLabel;
+        private System.Windows.Forms.Label confirmedDeathsDailyLabel;
+        private System.Windows.Forms.Label hospitalisationsDailyLabel;
     }
 }
 
