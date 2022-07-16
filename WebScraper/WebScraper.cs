@@ -67,7 +67,7 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
-            var vaccinated = cards.Skip(3).Take(1).Select(card =>
+            var vaccinated = cards.Skip(4).Take(1).Select(card =>
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
                 if (title.TextContent != "Vaccinated people")
