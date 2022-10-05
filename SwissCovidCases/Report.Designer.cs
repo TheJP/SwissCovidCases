@@ -134,9 +134,9 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(12, 126);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(137, 25);
+            this.label8.Size = new System.Drawing.Size(207, 25);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Fully Vaccinated";
+            this.label8.Text = "Vaccinated (≥ One Dose)";
             // 
             // fullyVaccinatedLabel
             // 

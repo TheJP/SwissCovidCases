@@ -16,16 +16,19 @@ namespace WebScraper
             public string NewConfirmedCases { get; }
             public string NewHospitalisations { get; }
             public string NewConfirmedDeaths { get; }
-            public string FullyVaccinatedPeople { get; }
+            /// <summary>
+            /// People with at least one dose.
+            /// </summary>
+            public string VaccinatedPeople { get; }
             public string DifferenceSince { get; }
 
-            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string fullyVaccinatedPeople, string differenceSince)
+            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string vaccinatedPeople, string differenceSince)
             {
                 Date = date;
                 NewConfirmedCases = newConfirmedCases;
                 NewHospitalisations = newHospitalisations;
                 NewConfirmedDeaths = newConfirmedDeaths;
-                FullyVaccinatedPeople = fullyVaccinatedPeople;
+                VaccinatedPeople = vaccinatedPeople;
                 DifferenceSince = differenceSince;
             }
         }
@@ -75,8 +78,8 @@ namespace WebScraper
                     throw new InvalidFormatException();
                 }
 
-                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(3).First();
-                if (key.TextContent != "Fully vaccinated")
+                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(1).First();
+                if (key.TextContent != "People with at least one dose")
                 {
                     throw new InvalidFormatException();
                 }

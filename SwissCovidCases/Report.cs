@@ -24,7 +24,7 @@ namespace SwissCovidCases
             hospitalisationsDailyLabel.Text = DailyValue(data.NewHospitalisations);
             confirmedDeathsDailyLabel.Text = DailyValue(data.NewConfirmedDeaths);
 
-            fullyVaccinatedLabel.Text = data.FullyVaccinatedPeople;
+            fullyVaccinatedLabel.Text = data.VaccinatedPeople;
             dateLabel.Text = data.Date.ToString("d", CultureInfo.CurrentCulture);
             differenceSinceLabel.Text = data.DifferenceSince;
         }
