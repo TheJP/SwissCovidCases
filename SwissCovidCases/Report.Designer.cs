@@ -38,11 +38,12 @@
             this.okButton = new System.Windows.Forms.Button();
             this.dateLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.fullyVaccinatedLabel = new System.Windows.Forms.Label();
+            this.peopleTestedLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.confirmedCasesDailyLabel = new System.Windows.Forms.Label();
             this.confirmedDeathsDailyLabel = new System.Windows.Forms.Label();
             this.hospitalisationsDailyLabel = new System.Windows.Forms.Label();
+            this.peopleTestedDailyLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // differenceSinceLabel
@@ -134,18 +135,18 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(12, 126);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(207, 25);
+            this.label8.Size = new System.Drawing.Size(120, 25);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Vaccinated (≥ One Dose)";
+            this.label8.Text = "People Tested";
             // 
-            // fullyVaccinatedLabel
+            // peopleTestedLabel
             // 
-            this.fullyVaccinatedLabel.AutoSize = true;
-            this.fullyVaccinatedLabel.Location = new System.Drawing.Point(268, 126);
-            this.fullyVaccinatedLabel.Name = "fullyVaccinatedLabel";
-            this.fullyVaccinatedLabel.Size = new System.Drawing.Size(59, 25);
-            this.fullyVaccinatedLabel.TabIndex = 10;
-            this.fullyVaccinatedLabel.Text = "label9";
+            this.peopleTestedLabel.AutoSize = true;
+            this.peopleTestedLabel.Location = new System.Drawing.Point(268, 126);
+            this.peopleTestedLabel.Name = "peopleTestedLabel";
+            this.peopleTestedLabel.Size = new System.Drawing.Size(59, 25);
+            this.peopleTestedLabel.TabIndex = 10;
+            this.peopleTestedLabel.Text = "label9";
             // 
             // label1
             // 
@@ -187,6 +188,15 @@
             this.hospitalisationsDailyLabel.TabIndex = 13;
             this.hospitalisationsDailyLabel.Text = "label5";
             // 
+            // peopleTestedDailyLabel
+            // 
+            this.peopleTestedDailyLabel.AutoSize = true;
+            this.peopleTestedDailyLabel.Location = new System.Drawing.Point(400, 126);
+            this.peopleTestedDailyLabel.Name = "peopleTestedDailyLabel";
+            this.peopleTestedDailyLabel.Size = new System.Drawing.Size(69, 25);
+            this.peopleTestedDailyLabel.TabIndex = 15;
+            this.peopleTestedDailyLabel.Text = "label10";
+            // 
             // Report
             // 
             this.AcceptButton = this.okButton;
@@ -194,11 +204,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(524, 217);
+            this.Controls.Add(this.peopleTestedDailyLabel);
             this.Controls.Add(this.confirmedDeathsDailyLabel);
             this.Controls.Add(this.hospitalisationsDailyLabel);
             this.Controls.Add(this.confirmedCasesDailyLabel);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.fullyVaccinatedLabel);
+            this.Controls.Add(this.peopleTestedLabel);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.okButton);
@@ -229,11 +240,12 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label fullyVaccinatedLabel;
+        private System.Windows.Forms.Label peopleTestedLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label confirmedCasesDailyLabel;
         private System.Windows.Forms.Label confirmedDeathsDailyLabel;
         private System.Windows.Forms.Label hospitalisationsDailyLabel;
+        private System.Windows.Forms.Label peopleTestedDailyLabel;
     }
 }
 

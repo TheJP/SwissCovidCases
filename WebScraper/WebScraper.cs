@@ -14,21 +14,18 @@ namespace WebScraper
         {
             public DateTime Date { get; }
             public string NewConfirmedCases { get; }
+            public string NewTestCases { get; }
             public string NewHospitalisations { get; }
             public string NewConfirmedDeaths { get; }
-            /// <summary>
-            /// People with at least one dose.
-            /// </summary>
-            public string VaccinatedPeople { get; }
             public string DifferenceSince { get; }
 
-            public Result(DateTime date, string newConfirmedCases, string newHospitalisations, string newConfirmedDeaths, string vaccinatedPeople, string differenceSince)
+            public Result(DateTime date, string newConfirmedCases, string newTestCases, string newHospitalisations, string newConfirmedDeaths, string differenceSince)
             {
                 Date = date;
                 NewConfirmedCases = newConfirmedCases;
+                NewTestCases = newTestCases;
                 NewHospitalisations = newHospitalisations;
                 NewConfirmedDeaths = newConfirmedDeaths;
-                VaccinatedPeople = vaccinatedPeople;
                 DifferenceSince = differenceSince;
             }
         }
@@ -53,7 +50,24 @@ namespace WebScraper
                 return null;
             }
 
-            var values = cards.Take(3).Select(card =>
+            var casesAndTests = cards.Skip(1).First();
+            var title = casesAndTests.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title")).TextContent;
+            if (title != "Laboratory-⁠⁠confirmed cases and tests")
+            {
+                throw new InvalidFormatException();
+            }
+            var casesAndTestKeys = casesAndTests.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
+            var casesKey = casesAndTestKeys.Skip(1).First();
+            var testsKey = casesAndTestKeys.Skip(4).First();
+            if (!casesKey.TextContent.StartsWith("Difference since") || !testsKey.TextContent.StartsWith("Difference since"))
+            {
+                throw new InvalidFormatException();
+            }
+            var casesAndTestValues = casesAndTests.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-value"));
+            var newCases = casesAndTestValues.First().TextContent;
+            var newTests = casesAndTestValues.Skip(2).First().TextContent;
+
+            var values = cards.Skip(4).Take(2).Select(card =>
             {
                 var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
                 var key = card.Descendents<IElement>().First(e => e.ClassList.Contains("bag-key-value-list__entry-key"));
@@ -65,28 +79,10 @@ namespace WebScraper
                 return (Title: title.TextContent, Value: value.TextContent, DifferenceSince: key.TextContent);
             }).ToArray();
 
-            if (values.Length != 3 || values[0].Title != "Laboratory-⁠confirmed cases" || values[1].Title != "Laboratory-⁠confirmed hospitalisations" || values[2].Title != "Laboratory-⁠confirmed deaths")
+            if (values.Length != 2 || values[0].Title != "Laboratory-⁠confirmed hospitalisations" || values[1].Title != "Laboratory-⁠confirmed deaths")
             {
                 throw new InvalidFormatException();
             }
-
-            var vaccinated = cards.Skip(4).Take(1).Select(card =>
-            {
-                var title = card.Descendents<IElement>().Single(e => e.ClassList.Contains("card__title"));
-                if (title.TextContent != "Vaccinated people")
-                {
-                    throw new InvalidFormatException();
-                }
-
-                var key = card.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-key")).Skip(1).First();
-                if (key.TextContent != "People with at least one dose")
-                {
-                    throw new InvalidFormatException();
-                }
-
-                var value = key.Parent.Parent.Descendents<IElement>().Where(e => e.ClassList.Contains("bag-key-value-list__entry-value")).First();
-                return value.TextContent;
-            }).First();
 
             // Date is in the subtitle of every card
             var encodedDate = document.QuerySelector(".card__subtitle").TextContent.Trim();
@@ -96,7 +92,7 @@ namespace WebScraper
                 throw new InvalidFormatException();
             }
 
-            return new Result(date, values[0].Value, values[1].Value, values[2].Value, vaccinated, values[0].DifferenceSince);
+            return new Result(date, newCases, newTests, values[0].Value, values[1].Value, values[0].DifferenceSince);
         }
     }
 }
